@@ -2,6 +2,20 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['@babel/preset-env']
+      },
+      dist: {
+        files: {
+          'build/js/app.transpiled.js': [
+            'build/js/app.js'
+          ]
+        }
+      }
+    },
+
     concat: {
       dist: {
         src: [
@@ -89,7 +103,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'build/js/app.min.js': [
-            'build/js/app.js'
+            'build/js/app.transpiled.js'
           ]
         }
       }
@@ -168,8 +182,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks("grunt-replace");
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-download-electron');
-  grunt.loadNpmTasks('grunt-asar');
+  // grunt.loadNpmTasks('grunt-download-electron');
+  // grunt.loadNpmTasks('grunt-asar');
+  grunt.loadNpmTasks('grunt-babel');
 
   // Custom Tasks
   grunt.loadTasks('tasks');
@@ -178,11 +193,12 @@ module.exports = function(grunt) {
     'resources',
     'concat',
     'replace',
+    'babel',
     'uglify',
     'copy',
     'processhtml',
     'clean:app',
   ]);
-  grunt.registerTask('dist', ['default', 'download-electron', 'asar']);
+  // grunt.registerTask('dist', ['default', 'download-electron', 'asar']);
   grunt.registerTask('serve', ['resources', 'connect', 'watch']);
 }

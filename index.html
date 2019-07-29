@@ -16,12 +16,19 @@
     <body>
         <!-- Canvas placeholder -->
         <div id="screen"></div>
+        <div id="controls">
+            <m-controls></m-controls>
+        </div>
 
         <!-- es5/es6 shim for legacy browsers" -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.11/es5-shim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.11/es5-sham.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-sham.min.js"></script>
+
+        <!-- Vue -->
+        <script type="text/javascript" src="lib/vue.min.js"></script>
+        <script type="text/javascript" src="js/controls.js"></script>
 
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
@@ -40,12 +47,25 @@
         <script type="text/javascript" src="js/screens/title.js"></script>
         <script type="text/javascript" src="js/screens/play.js"></script>
         <!-- /build -->
+        
+        <div id="templates" style="display: none">
+            <div id="t-controls">
+                <div @click="increment">Clicked {{ times }} times</div>
+            </div>
+        </div>
 
         <!-- Bootstrap -->
         <script type="text/javascript">
             me.device.onReady(function onReady() {
                 game.onload();
             });
+
+            var vm = new Vue({
+                el: "#controls",
+                data: {
+                    hello: "world"
+                }
+            })
         </script>
     </body>
 </html>

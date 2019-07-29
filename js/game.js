@@ -12,13 +12,13 @@ var game = {
     // Run on page load.
     "onload" : function () {
         // Initialize the video.
-        if (!me.video.init(960, 640, {wrapper : "screen", scale : "auto"})) {
+        if (!me.video.init(640, 640, {wrapper : "screen", scale : "flex"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
 
         // Initialize the audio.
-        me.audio.init("mp3,ogg");
+        // me.audio.init("mp3,ogg");
 
         // set and load all resources.
         // (this will also automatically switch to the loading screen)
@@ -27,11 +27,11 @@ var game = {
 
     // Run on game resources loaded.
     "loaded" : function () {
-        me.state.set(me.state.MENU, new game.TitleScreen());
+        //me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // add our player entity in the entity pool
-        me.pool.register("mainPlayer", game.PlayerEntity);
+        //me.pool.register("mainPlayer", game.PlayerEntity);
 
         // Start the game.
         me.state.change(me.state.PLAY);
