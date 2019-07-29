@@ -8,22 +8,23 @@ module.exports = function(grunt) {
         presets: ['@babel/preset-env']
       },
       dist: {
-        files: {
-          'build/js/app.transpiled.js': [
-            'build/js/app.js'
-          ]
-        }
+        files: [{
+          expand: true,
+          cwd: "js",
+          src: ["**/*.js"],
+          dest: "build/js/transpiled",
+        }],
       }
     },
 
     concat: {
       dist: {
         src: [
-          'lib/melonjs.js',
+          'lib/*.js',
           'lib/plugins/**/*.js',
-          'js/game.js',
+          'build/js/transpiled/game.js',
           'build/js/resources.js',
-          'js/**/*.js',
+          'build/js/transpiled/**/*.js',
         ],
         dest: 'build/js/app.js'
       }
@@ -98,12 +99,13 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         report: 'min',
-        preserveComments: 'some'
+        preserveComments: 'some',
+        sourceMap: true
       },
       dist: {
         files: {
           'build/js/app.min.js': [
-            'build/js/app.transpiled.js'
+            'build/js/app.js'
           ]
         }
       }
@@ -191,13 +193,13 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', [
     'resources',
+    'babel',
     'concat',
     'replace',
-    'babel',
     'uglify',
     'copy',
     'processhtml',
-    'clean:app',
+    //'clean:app',
   ]);
   // grunt.registerTask('dist', ['default', 'download-electron', 'asar']);
   grunt.registerTask('serve', ['resources', 'connect', 'watch']);

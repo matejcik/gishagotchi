@@ -1,8 +1,8 @@
 Vue.component("m-controls", {
     template: "#t-controls",
-    data: () => ({ times: 0 }),
+    data: function() { return { times: 0 } },
     methods: {
-        increment() {
+        increment: function() {
             this.times ++
         }
     }
