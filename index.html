@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>melonJS Boilerplate</title>
+        <title>GISHagotchi</title>
         <link rel="stylesheet" type="text/css" media="screen" href="index.css">
         <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,13 +55,13 @@
         <!-- /build -->
         
         <div id="templates" style="display: none">
-            <div id="t-controls">
+            <div id="t-controls"><div>
+                <div id="mood">{{ donkeyMood }}</div>
                 <div>
-                    <div @click="increment">Clicked {{ times }} times</div>
-                    hello
-                    <button @click="changeDirection">Change direction</button>
+                    <span>Hunger: {{ hunger }}</span>
+                    <span>Mood: {{ mood }}</span>
                 </div>
-            </div>
+            </div></div>
         </div>
 
         <!-- Bootstrap -->

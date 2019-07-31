@@ -7,7 +7,10 @@ const DONKEY_STATES = [
 
 Vue.component("m-controls", {
 	template: "#t-controls",
-	data: () => ({ times: 0 }),
+	data: () => ({
+		times: 0,
+		donkeyMood: "No mood"
+	}),
 	methods: {
 		increment() {
 			this.times++
@@ -15,6 +18,18 @@ Vue.component("m-controls", {
 
 		changeDirection() {
 			game.donkey.reverseDirection()
+		},
+
+		update() {
+			let i = game.randint(0, DONKEY_STATES.length)
+			this.donkeyMood = DONKEY_STATES[i]
 		}
-	}
+	},
+
+	created() {
+		this.$options.updater = setInterval(() => this.update(), 1000);
+	},
+	beforeDestroy() {
+		clearInterval(this.$options.updater)
+	},
 })

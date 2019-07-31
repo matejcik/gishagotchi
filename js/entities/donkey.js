@@ -70,7 +70,9 @@ game.Donkey = me.Entity.extend({
 			this.action = this.queue.shift()
 			this.action.start(this)
 		}
-		if (!this.action.update(this, dt)) this.action = null
+		if (!this.action.update(this, dt))  {
+			this.action = null
+		}
 	},
 
 	updateQueue() {
@@ -99,7 +101,7 @@ game.Donkey = me.Entity.extend({
 	onCollision(response, other) {
 		if (other instanceof game.DonkeyTarget) {
 			me.game.world.removeChild(other)
-			this.action.moving = false
+			if (this.action) this.action.moving = false
 			return false
 		}
 		return true
