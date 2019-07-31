@@ -5,6 +5,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "flow-bin": "^0.104.0",
     "grunt": "^1.0.1",
     "grunt-babel": "^8.0.0",
     "grunt-contrib-clean": "^2.0.0",

@@ -10,6 +10,15 @@ game.PlayScreen = me.ScreenObject.extend({
         // Can also be forced by specifying a "Infinity" z value to the addChild function.
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD);
+
+        me.game.world.addChild(me.pool.pull("donkey"))
+        me.game.world.addChild(new me.ColorLayer("background", "#000080"), 0)
+
+        me.game.world.addChild(me.pool.pull("wall", 0, 0))
+        me.game.world.addChild(me.pool.pull("wall", me.game.viewport.width - 1, 0))
+        me.game.world.addChild(me.pool.pull("floor", 0, 500))
+
+        game.donkey = me.game.world.getChildByName("donkey")[0]
     },
 
     /**

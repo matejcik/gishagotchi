@@ -17,8 +17,25 @@ body {
     margin: 0;
 }
 
+#holder {
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    background-color: #d00;
+    font-size: 20pt;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+#controls {
+    padding: 1rem;
+}
+
 #screen canvas {
-    margin: auto;
+    margin: 0;
 
     /* Hide the gap for font descenders. */
     display: block;
