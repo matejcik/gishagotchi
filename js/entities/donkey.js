@@ -3,7 +3,7 @@ game.DonkeyTarget = me.Entity.extend({
 		this._super(me.Entity, "init", [x, y, { height: 5, width: 5 }])
 		this.z = -1
 		this.body.collisionType = me.collision.types.ACTION_OBJECT
-		this.renderable = fill(5, 5)
+		//this.renderable = fill(5, 5)
 	}
 })
 

@@ -56,11 +56,19 @@
         
         <div id="templates" style="display: none">
             <div id="t-controls"><div>
-                <div id="mood">{{ donkeyMood }}</div>
+                <div id="mood">Donkey is {{ donkeyStatus }}</div>
+                <div id="action" v-if="donkey.action">Donkey is currently {{ donkey.action.name }}</div>
                 <div>
-                    <span>Hunger: {{ hunger }}</span>
-                    <span>Mood: {{ mood }}</span>
+                    <m-status label="Food" :value="donkey.food"></m-status>
+                    <m-status label="Mood" :value="donkey.mood"></m-status>
+                    <m-status label="Cocoon completion" :value="donkey.cocoon"></m-status>
                 </div>
+                <button @click="feed" :disabled="donkey.action">Feed</button>
+                <button @click="pet" :disabled="donkey.action">Pet</button>
+            </div></div>
+
+            <div id="t-status"><div>
+                {{ label }}: <span :style="style">{{ value }}</span>
             </div></div>
         </div>
 
