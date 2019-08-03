@@ -14,9 +14,9 @@ game.PlayScreen = me.ScreenObject.extend({
         me.game.world.addChild(me.pool.pull("donkey"))
         me.game.world.addChild(new me.ColorLayer("background", "#000080"), 0)
 
-        me.game.world.addChild(me.pool.pull("wall", 0, 0))
-        me.game.world.addChild(me.pool.pull("wall", me.game.viewport.width - 1, 0))
-        me.game.world.addChild(me.pool.pull("floor", 0, 500))
+        me.game.world.addChild(me.pool.pull("wall", -1, 0))
+        me.game.world.addChild(me.pool.pull("wall", me.game.viewport.width, 0))
+        me.game.world.addChild(me.pool.pull("floor", 0, 380))
 
         game.donkey = me.game.world.getChildByName("donkey")[0]
     },

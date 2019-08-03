@@ -9,7 +9,8 @@ game.DonkeyTarget = me.Entity.extend({
 
 game.Donkey = me.Entity.extend({
 	init(x, y, settings) {
-		var image = me.loader.getImage("donkey-sketch")
+		this.asscat = me.loader.getImage("asscat")
+		this.assbutt = me.loader.getImage("assbutt")
 		x = x || me.game.viewport.width / 2
 		y = y || 0
 
@@ -17,9 +18,9 @@ game.Donkey = me.Entity.extend({
 			x,
 			y,
 			{
-				image,
-				height: image.height,
-				width: image.width,
+				image: this.asscat,
+				height: this.asscat.height,
+				width: this.asscat.width,
 				name: "donkey",
 				...settings
 			}
@@ -32,7 +33,7 @@ game.Donkey = me.Entity.extend({
 			move: {
 				start(d) {
 					this.moving = true
-					me.game.world.addChild(me.pool.pull("donkeyTarget", this.dest, 485))
+					me.game.world.addChild(me.pool.pull("donkeyTarget", this.dest, 360))
 					let dir = this.dest - d.centerX
 					if (dir > 0) {
 						d.body.force.x = d.body.maxVel.x
@@ -56,12 +57,56 @@ game.Donkey = me.Entity.extend({
 					this.ms -= dt
 					return this.ms > 0
 				}
+			},
+
+			die: {
+				start(d) {
+					d.body.force.x = 0
+					d.body.force.y = 0
+					d.renderable.flipY(true)
+				},
+				update(d, dt) { return true }
 			}
 		}
+
+		this.dead = false
 
 		this.queue = [{ ...this.actions.stand, ms: 1000 }]
 		this.action = null
 		this.doAction(0)
+	},
+
+	die() {
+		if (!this.dead) {
+			this.action = null
+			this.queue.unshift(this.actions.die)
+		}
+		this.dead = true
+	},
+
+	restart() {
+		this.dead = false
+		this.action = null
+		this.queue = []
+		this.renderable.flipY(false)
+		this.renderable.image = this.asscat
+		this.pos.x = 50
+		this.pos.y = 100
+	},
+
+	flyAway() {
+		this.body.force.x = 0
+		this.renderable.image = this.assbutt
+		this.action = {
+			update(d, dt) {
+				if (Math.random() < 0.08) {
+					d.body.jumping = true
+					d.body.force.y = -6
+				}
+				else d.body.force.y = 0
+				return true
+			}
+		}
 	},
 
 	doAction(dt) {

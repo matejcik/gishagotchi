@@ -7,7 +7,7 @@
       destroy() {},
       draw(renderer) {
         let color = renderer.getColor();
-        renderer.setColor("#5EFF7E");
+        renderer.setColor("#077c20");
         renderer.fillRect(0, 0, this.width, this.height);
         renderer.setColor(color);
       }
